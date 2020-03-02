@@ -34,7 +34,7 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="GHi-rD-OcJ" id="2Gu-Xs-DOX"/>
+                            <outlet property="dataSource" destination="GHi-rD-OcJ" id="UhA-pr-Ecg"/>
                             <outlet property="delegate" destination="GHi-rD-OcJ" id="uXj-1d-6JU"/>
                         </connections>
                     </tableView>
