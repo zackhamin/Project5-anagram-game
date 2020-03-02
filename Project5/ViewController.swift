@@ -24,7 +24,7 @@ class ViewController: UITableViewController {
             }
         }
         if allWords.isEmpty{
-            allWords = ["silkword"]
+            allWords = ["silkworm"]
         }
         
         func startGame() {
@@ -56,8 +56,36 @@ class ViewController: UITableViewController {
         ac.addAction(submitAction)
         present(ac, animated: true)
     }
+    func isPossible(word: String) -> Bool {
+        guard var tempWord = title?.lowercased() else {return false}
+        
+        for letter in word {
+            if let position = tempWord.firstIndex(of: letter) {
+                tempWord.remove(at: position)
+            } else{
+                return false
+            }
+        }
+        
+        return true
+    }
+    func isOriginal(word: String) -> Bool {
+        return  !usedWords.contains(word)
+    }
+    func isReal(word: String) -> Bool {
+        let checker = UITextChecker()
+        let range = NSRange(location: 0, length: word.utf16.count)
+        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        
+        return misspelledRange.location == NSNotFound
+    }
+    
     func submit(_ answer: String){
         let lowerAnswer = answer.lowercased()
+        let errorTitle: String
+        let errorMessage: String
+        
+        
         
         if isPossible(word: lowerAnswer){
             if isOriginal(word: lowerAnswer){
@@ -70,15 +98,6 @@ class ViewController: UITableViewController {
             }
         }
         
-    }
-    func isPossible(word: String) -> Bool {
-        return true
-    }
-    func isOriginal(word: String) -> Bool {
-        return true
-    }
-    func isReal(word: String) -> Bool {
-        return true
     }
 }
 
